@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header className={`contentbox ${styles.header}`}>
       <h3>Logo</h3>
-      <div>input searchbar</div>
+      <input type='text' />
       <nav>
         <Link to='/'>Homepage</Link>
       </nav>

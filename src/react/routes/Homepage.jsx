@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "./Pagination";
-import Articles from "react/components/Articles/Articles";
+import { Articles } from "react/components/components";
 
 const Homepage = () => {
   const [articleState, setArticles] = useState({
     articles: [],
     isFetching: false
   });
+
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
+  //eslint-disable-next-line
   const [articlesPerPage, setArticlesPerPage] = useState(25);
 
   const indexOfLastPost = currentPage * articlesPerPage;
@@ -24,8 +26,11 @@ const Homepage = () => {
   };
 
   useEffect(() => {
+    const year = "2020";
+    const month = "1";
+    const query = "";
     const key = `GW3IYr3IjA4QnJDcv1JbgQBxRzK7ABBx`;
-    const url = `https://api.nytimes.com/svc/archive/v1/2020/1.json?api-key=${key}`;
+    const url = `https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?${`q=${query}&`}api-key=${key}`;
     const fetchArticles = async () => {
       try {
         setArticles({ articles: articleState.articles, isFetching: true });
@@ -38,6 +43,7 @@ const Homepage = () => {
       }
     };
     fetchArticles();
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -46,7 +52,7 @@ const Homepage = () => {
 
   return (
     <div className='homepage'>
-      {/* {articleState.articles ? ( */}
+      {/* {articleState.articles.length !== 0 ? ( */}
       <Articles articles={currentArticles} loading={articleState.isFetching} />
       {/* ) : null} */}
       <Pagination
