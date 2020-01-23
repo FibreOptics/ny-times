@@ -1,0 +1,20 @@
+@import "./variables";
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url(../assets/abstract-antique-backdrop-background-129731.jpg);
+  background-size: auto;
+}
+
+.contentbox {
+  background-color: $PinkLeaf;
+  padding: 1.5rem;
+  //margin: 0 22rem;
+}
+.homepage {
+  background-color: $PinkLeaf;
+  //margin: 2rem 22rem;
+  padding: 1rem;
+  min-height: 50rem;
+}
