@@ -12,15 +12,24 @@ body {
   padding: 1.5rem;
   margin: 0 22rem;
 }
-.homepage {
+.homepage,
+.page404 {
   background-color: $PinkLeaf;
   margin: 2rem 22rem;
   padding: 1rem;
   min-height: 50rem;
+  input {
+    margin-left: 3rem;
+    padding: 0.5rem 0.5rem;
+    min-width: 18rem;
+  }
 }
 .detailspage {
   background-color: $PinkLeaf;
   margin: 2rem 22rem;
   padding: 1rem;
   min-height: 50rem;
+  a {
+    font-size: 1.5rem;
+  }
 }
