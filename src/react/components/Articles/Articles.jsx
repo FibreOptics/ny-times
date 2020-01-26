@@ -6,24 +6,27 @@ const Articles = ({ articles, loading }) => {
   if (loading) return <h2>loading...</h2>;
 
   return (
-    <ul>
+    <div className='article'>
       {articles.map((article, index) => {
         const id = article._id.split("/");
         const pathname = `/${index}/${id[3]}`;
         return (
-          <li key={pathname}>
+          <div className='articleBox' key={pathname}>
             <Link
               to={{
                 pathname: pathname,
                 state: { article }
               }}
             >
-              {article.headline.main}
+              <div>
+                <h4>{article.headline.main}</h4>
+                <h5>{article.abstract}</h5>
+              </div>
             </Link>
-          </li>
+          </div>
         );
       })}
-    </ul>
+    </div>
   );
 };
 

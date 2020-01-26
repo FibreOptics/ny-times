@@ -5,31 +5,96 @@ body {
   padding: 0;
   background-image: url(../assets/abstract-antique-backdrop-background-129731.jpg);
   background-size: auto;
+  font-family: Varela Round;
+  color: rgb(43, 8, 43);
 }
 
 .contentbox {
-  background-color: $PinkLeaf;
+  background-color: $RaginBeige;
   padding: 1.5rem;
   margin: 0 22rem;
 }
 .homepage,
 .page404 {
-  background-color: $PinkLeaf;
-  margin: 2rem 22rem;
+  border-radius: 7px;
+  background-color: $RaginBeige;
+  margin: 1.75rem 22rem;
   padding: 1rem;
   min-height: 50rem;
   input {
-    margin-left: 3rem;
+    margin: 1rem 0 0 3rem;
     padding: 0.5rem 0.5rem;
-    min-width: 18rem;
+    min-width: 22rem;
   }
 }
 .detailspage {
-  background-color: $PinkLeaf;
-  margin: 2rem 22rem;
+  border-radius: 7px;
+  background-color: $RaginBeige;
+  margin: 1.75rem 22rem;
   padding: 1rem;
-  min-height: 50rem;
+  min-height: 47rem;
   a {
     font-size: 1.5rem;
   }
+}
+//Each article on homepage
+.article {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .articleBox {
+    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.15);
+    margin: 1rem 0.75rem;
+    border-radius: 7px;
+    flex: 0 0 46%;
+    display: flex;
+    a,
+    a:visited {
+      color: currentColor;
+      text-decoration: none;
+    }
+    a {
+      flex: 1;
+      padding: 0.75rem 1.5rem;
+      border-radius: 7px;
+      background-color: $SleutheYellow;
+    }
+    a:hover {
+      background-color: $CoralPink; //rgba(255, 254, 254, 0.904);
+    }
+  }
+}
+//pagination
+.containerClassName {
+  margin: 1rem 0 0.75rem 3rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  //background-color: rgb(66, 66, 248);
+  list-style: none;
+  li {
+    a {
+      background-color: rgba(240, 239, 239, 0.562);
+      cursor: pointer;
+      margin: 0.1rem;
+      padding: 0.2rem 0.3rem;
+      border: 1px solid black;
+      border-radius: 3px;
+    }
+    a:hover {
+      background-color: $PinkLeaf;
+    }
+  }
+  .activeClassName {
+    a,
+    a:hover {
+      color: rgb(220, 250, 233);
+      background-color: rgba(2, 80, 168, 0.959);
+    }
+  }
+}
+.pageClassName,
+.previousLinkClassName,
+.nextLinkClassName,
+.break-me {
 }

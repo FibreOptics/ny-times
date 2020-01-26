@@ -9,8 +9,8 @@ const Pagination = ({ articlesPerPage, totalArticles, paginate }) => {
 
   return (
     <ReactPaginate
-      previousLabel={"previous"}
-      nextLabel={"next"}
+      previousLabel={"Previous"}
+      nextLabel={"Next"}
       breakLabel={"..."}
       breakClassName={"break-me"}
       //
@@ -19,9 +19,11 @@ const Pagination = ({ articlesPerPage, totalArticles, paginate }) => {
       pageRangeDisplayed={5}
       onPageChange={number => paginate(number.selected + 1)}
       //
-      containerClassName={"pagination"}
-      subContainerClassName={"pages pagination"}
-      activeClassName={"active"}
+      containerClassName={"containerClassName"}
+      pageClassName={"pageClassName"}
+      previousLinkClassName={"previousLinkClassName"}
+      nextLinkClassName={"nextLinkClassName"}
+      activeClassName={"activeClassName"}
     />
   );
 };

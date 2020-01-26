@@ -8,7 +8,7 @@ const Homepage = () => {
     isFetching: false
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [articlesPerPage] = useState(25);
+  const [articlesPerPage] = useState(16);
   const [query, setQuery] = useState("");
   const [typingTimeout, setTypingTO] = useState(0);
 
@@ -38,7 +38,7 @@ const Homepage = () => {
     setTypingTO(
       setTimeout(() => {
         setQuery(input);
-      }, 750)
+      }, 618)
     );
   };
   //Sort
@@ -52,9 +52,31 @@ const Homepage = () => {
       setArticles({ articles: articleState.articles, isFetching: true });
       const response = await fetch(url);
       const data = await response.json();
-      const articlesFromFetch = data.response.docs;
-      //articlesFromFetch.sort(sortByDate).reverse();
+      const fromFetch = data.response.docs;
+      const articlesFromFetch = fromFetch
+        .sort(sortByDate)
+        .reverse()
+        .filter((v, i, a) => {
+          for (let index = 0; index < i; index++) {
+            if (
+              v.headline.main === a[index].headline.main &&
+              v.abstract === a[index].abstract &&
+              v.web_url === a[index].web_url &&
+              v.pub_date === a[index].pub_date &&
+              a.indexOf(v.headline.main) !== index
+            )
+              return false;
+          }
+          return true;
+        });
 
+      /*const log = articlesFromFetch.find(
+        element =>
+          element.abstract ===
+          "Quotation of the Day for Sunday, January 26, 2020."
+      ); 
+      console.log(log);
+      */
       setArticles({
         articles: [...new Set(articlesFromFetch)],
         isFetching: false
@@ -83,6 +105,7 @@ const Homepage = () => {
   }, []);
   useEffect(() => {
     if (query !== "") searchNYT();
+    else autoFetch();
     //eslint-disable-next-line
   }, [query]);
 
@@ -93,6 +116,11 @@ const Homepage = () => {
   return (
     <div className='homepage'>
       <input placeholder='Search...' type='text' onChange={handleChange} />
+      <Pagination
+        articlesPerPage={articlesPerPage}
+        totalArticles={articleState.articles.length}
+        paginate={paginate}
+      />
       {/* {articleState.articles.length !== 0 ? ( */}
       <Articles articles={currentArticles} loading={articleState.isFetching} />
       {/* ) : null} */}

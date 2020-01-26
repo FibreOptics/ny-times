@@ -2,9 +2,17 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
-  & > :not(input) {
-    margin: 0 2rem;
-    padding: 0.5rem 1.5rem;
+  border-radius: 0 0 7px 7px;
+  a,
+  a:visited {
+    text-decoration: none;
+    color: currentColor;
+    display: flex;
+    img {
+      margin-left: 2rem;
+    }
+    h2 {
+      margin: 0 2rem 0 1rem;
+    }
   }
 }
