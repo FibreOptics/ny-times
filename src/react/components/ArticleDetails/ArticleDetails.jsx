@@ -1,14 +1,21 @@
 import React from "react";
+import { GoBack } from "react/components/components";
 
-const ArticleDetails = ({ article }) => {
+const ArticleDetails = ({ history, article }) => {
   const date = new Date(article.pub_date).toUTCString();
+  const backHome = () => {
+    history.goBack();
+  };
   console.log(article);
   return (
     <div className='detailspage'>
-      <h1>{article.headline.main}</h1>
-      <h2>{article.abstract}</h2>
-      <h3>{date}</h3>
-      <div>{article.byline.original}</div>
+      <GoBack goBack={backHome} />
+      <h2>{article.headline.main}</h2>
+      <p>
+        Source: <a href={article.web_url}>{article.web_url}</a>
+      </p>
+      <h4>{date}</h4>
+      <p>{article.byline.original}</p>
       {article.multimedia.length !== 0 ? (
         <img
           src={`https://static01.nyt.com/${article.multimedia[0].url}`}
@@ -18,10 +25,8 @@ const ArticleDetails = ({ article }) => {
       ) : (
         <h3>no image</h3>
       )}
-      <div>{article.lead_paragraph}</div>
-      <a href={article.web_url}>
-        <span>Source</span>
-      </a>
+      <p>{article.abstract}</p>
+      <p>{article.lead_paragraph}</p>
     </div>
   );
 };

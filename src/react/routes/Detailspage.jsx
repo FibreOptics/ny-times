@@ -2,9 +2,9 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { ArticleDetails } from "react/components/components";
 
-const Detailspage = props => {
-  return props.location.state ? (
-    <ArticleDetails article={props.location.state.article} />
+const Detailspage = ({ location, history }) => {
+  return location.state ? (
+    <ArticleDetails history={history} article={location.state.article} />
   ) : (
     <Redirect to='/404' />
   );

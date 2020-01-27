@@ -1,0 +1,13 @@
+.goBack {
+  align-self: flex-start;
+  background-color: rgba(240, 239, 239, 0.562);
+  padding: 0.3rem 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid black;
+  cursor: pointer;
+  border-radius: 7px;
+  &:hover {
+    background-color: #ffaaab;
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgba(9, 28, 70, 0.938);
+  }
+}

@@ -12,7 +12,6 @@ const Pagination = ({ articlesPerPage, totalArticles, paginate }) => {
       previousLabel={"Previous"}
       nextLabel={"Next"}
       breakLabel={"..."}
-      breakClassName={"break-me"}
       //
       pageCount={pageNo.length}
       marginPagesDisplayed={2}
@@ -20,9 +19,6 @@ const Pagination = ({ articlesPerPage, totalArticles, paginate }) => {
       onPageChange={number => paginate(number.selected + 1)}
       //
       containerClassName={"containerClassName"}
-      pageClassName={"pageClassName"}
-      previousLinkClassName={"previousLinkClassName"}
-      nextLinkClassName={"nextLinkClassName"}
       activeClassName={"activeClassName"}
     />
   );

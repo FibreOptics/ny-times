@@ -1,0 +1,26 @@
+.article {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .articleBox {
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgba(9, 28, 70, 0.938);
+    margin: 1rem 0.75rem;
+    border-radius: 7px;
+    flex: 0 0 46%;
+    display: flex;
+    a,
+    a:visited {
+      color: currentColor;
+      text-decoration: none;
+    }
+    a {
+      flex: 1;
+      padding: 0.75rem 1.5rem;
+      border-radius: 7px;
+      background-color: #ffd77bec;
+    }
+    a:hover {
+      background-color: #ff5e6c; //rgba(255, 254, 254, 0.904);
+    }
+  }
+}

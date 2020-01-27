@@ -15,7 +15,6 @@ const Homepage = () => {
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
-  const key = `GW3IYr3IjA4QnJDcv1JbgQBxRzK7ABBx`;
 
   const indexOfLastPost = currentPage * articlesPerPage;
   const indexOfFirstPost = indexOfLastPost - articlesPerPage;
@@ -41,7 +40,7 @@ const Homepage = () => {
       }, 618)
     );
   };
-  //Sort
+
   const sortByDate = (a, b) => {
     return new Date(a.pub_date) - new Date(b.pub_date);
   };
@@ -56,6 +55,7 @@ const Homepage = () => {
       const articlesFromFetch = fromFetch
         .sort(sortByDate)
         .reverse()
+        //filter dups
         .filter((v, i, a) => {
           for (let index = 0; index < i; index++) {
             if (
@@ -69,14 +69,6 @@ const Homepage = () => {
           }
           return true;
         });
-
-      /*const log = articlesFromFetch.find(
-        element =>
-          element.abstract ===
-          "Quotation of the Day for Sunday, January 26, 2020."
-      ); 
-      console.log(log);
-      */
       setArticles({
         articles: [...new Set(articlesFromFetch)],
         isFetching: false
@@ -88,14 +80,14 @@ const Homepage = () => {
   };
 
   const autoFetch = () => {
-    const url = `https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${key}`;
+    const url = `https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${process.env.REACT_APP_NYT_API_KEY}`;
     fetchArticles(url);
   };
 
   const searchNYT = () => {
     const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?${
       query !== "" ? `q=${query}&` : ""
-    }api-key=${key}`;
+    }api-key=${process.env.REACT_APP_NYT_API_KEY}`;
     fetchArticles(url);
   };
 
@@ -121,9 +113,7 @@ const Homepage = () => {
         totalArticles={articleState.articles.length}
         paginate={paginate}
       />
-      {/* {articleState.articles.length !== 0 ? ( */}
       <Articles articles={currentArticles} loading={articleState.isFetching} />
-      {/* ) : null} */}
       <Pagination
         articlesPerPage={articlesPerPage}
         totalArticles={articleState.articles.length}

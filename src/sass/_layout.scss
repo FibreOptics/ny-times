@@ -31,37 +31,17 @@ body {
   border-radius: 7px;
   background-color: $RaginBeige;
   margin: 1.75rem 22rem;
-  padding: 1rem;
+  padding: 2rem 3.5rem;
   min-height: 47rem;
-  a {
-    font-size: 1.5rem;
-  }
-}
-//Each article on homepage
-.article {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  .articleBox {
-    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.15);
-    margin: 1rem 0.75rem;
-    border-radius: 7px;
-    flex: 0 0 46%;
-    display: flex;
-    a,
-    a:visited {
-      color: currentColor;
-      text-decoration: none;
-    }
-    a {
-      flex: 1;
-      padding: 0.75rem 1.5rem;
-      border-radius: 7px;
-      background-color: $SleutheYellow;
-    }
-    a:hover {
-      background-color: $CoralPink; //rgba(255, 254, 254, 0.904);
-    }
+  flex-direction: column;
+  h2,
+  h4 {
+    margin: 0rem;
+  }
+  img {
+    align-self: flex-start;
+    margin: auto;
   }
 }
 //pagination
@@ -83,6 +63,7 @@ body {
     }
     a:hover {
       background-color: $PinkLeaf;
+      box-shadow: 0.03rem 0.03rem 0.03rem 0.03rem rgba(9, 28, 70, 0.938);
     }
   }
   .activeClassName {
@@ -90,11 +71,7 @@ body {
     a:hover {
       color: rgb(220, 250, 233);
       background-color: rgba(2, 80, 168, 0.959);
+      box-shadow: 0.03rem 0.03rem 0.03rem 0.03rem rgba(9, 28, 70, 0.938);
     }
   }
-}
-.pageClassName,
-.previousLinkClassName,
-.nextLinkClassName,
-.break-me {
 }

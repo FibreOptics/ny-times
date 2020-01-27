@@ -1,17 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//import styles from "./Articles.module.scss";
+import { Loading } from "react/components/components";
+import styles from "./Articles.module.scss";
 
 const Articles = ({ articles, loading }) => {
-  if (loading) return <h2>loading...</h2>;
-
+  if (loading)
+    return (
+      <div className={styles.article}>
+        <Loading />
+      </div>
+    );
   return (
-    <div className='article'>
+    <div className={styles.article}>
       {articles.map((article, index) => {
         const id = article._id.split("/");
         const pathname = `/${index}/${id[3]}`;
         return (
-          <div className='articleBox' key={pathname}>
+          <div className={styles.articleBox} key={pathname}>
             <Link
               to={{
                 pathname: pathname,
