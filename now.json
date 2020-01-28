@@ -1,0 +1,7 @@
+{
+  "build": {
+    "env": {
+      "REACT_APP_NYT_API_KEY": "@react_app_nyt_api_key"
+    }
+  }
+}
