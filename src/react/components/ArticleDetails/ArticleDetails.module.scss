@@ -1,0 +1,32 @@
+.detailspage {
+  border-radius: 7px;
+  background-color: #fff5d7;
+  margin: 1.75rem 22rem;
+  padding: 2rem 3.5rem;
+  min-height: 47rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  h2,
+  h4 {
+    margin: 0rem;
+  }
+  img {
+    max-width: 100%;
+    margin: auto;
+  }
+  @media only screen and (max-width: 1550px) {
+    margin: 1.75rem 0;
+  }
+  @media only screen and (max-width: 700px) {
+    padding: 0.75rem 1.25rem;
+  }
+  @media only screen and (max-width: 500px) {
+    h2 {
+      font-size: 16px;
+    }
+    p {
+      word-wrap: break-word;
+    }
+  }
+}

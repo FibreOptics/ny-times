@@ -1,5 +1,6 @@
 import React from "react";
 import { GoBack } from "react/components/components";
+import styles from "./ArticleDetails.module.scss";
 
 const ArticleDetails = ({ history, article }) => {
   const date = new Date(article.pub_date).toUTCString();
@@ -8,7 +9,7 @@ const ArticleDetails = ({ history, article }) => {
   };
   console.log(article);
   return (
-    <div className='detailspage'>
+    <div className={styles.detailspage}>
       <GoBack goBack={backHome} />
       <h2>{article.headline.main}</h2>
       <p>

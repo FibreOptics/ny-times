@@ -2,12 +2,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: auto;
   .articleBox {
     box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgba(9, 28, 70, 0.938);
     margin: 1rem 0.75rem;
     border-radius: 7px;
     flex: 0 0 46%;
     display: flex;
+    input {
+      margin: 1rem 0 0 3rem;
+      padding: 0.5rem 0.5rem;
+      min-width: 22rem;
+    }
     a,
     a:visited {
       color: currentColor;
@@ -21,6 +27,9 @@
     }
     a:hover {
       background-color: #ff5e6c; //rgba(255, 254, 254, 0.904);
+    }
+    @media only screen and (max-width: 900px) {
+      flex: 1 75%;
     }
   }
 }

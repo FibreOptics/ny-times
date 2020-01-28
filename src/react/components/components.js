@@ -4,3 +4,4 @@ export { default as ArticleDetails } from "./ArticleDetails/ArticleDetails";
 export { default as Footer } from "./Footer/Footer";
 export { default as GoBack } from "./GoBack/GoBack";
 export { default as Loading } from "./Loading/Loading";
+export { default as SortBar } from "./SortBar/SortBar";

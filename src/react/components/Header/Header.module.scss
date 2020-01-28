@@ -8,11 +8,26 @@
     text-decoration: none;
     color: currentColor;
     display: flex;
+    align-items: center;
+    flex-wrap: wrap;
     img {
       margin-left: 2rem;
     }
     h2 {
       margin: 0 2rem 0 1rem;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    a,
+    a:visited {
+      img {
+        margin: 0;
+      }
+      h2 {
+        margin: 0;
+        margin-left: 0.5rem;
+        font-size: 18px;
+      }
     }
   }
 }

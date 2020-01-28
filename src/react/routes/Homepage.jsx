@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "./Pagination";
-import { Articles } from "react/components/components";
+import { SortBar, Articles } from "react/components/components";
+import useDebounce from "utils/useDebounce";
 
 const Homepage = () => {
-  const [articleState, setArticles] = useState({
-    articles: [],
-    isFetching: false
-  });
+  const [articleState, setArticles] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [articlesPerPage] = useState(16);
-  const [query, setQuery] = useState("");
-  const [typingTimeout, setTypingTO] = useState(0);
+  const [searchInput, setSearchInput] = useState("");
+
+  const debouncedSearchInput = useDebounce(searchInput, 368);
 
   const today = new Date();
   const year = today.getFullYear();
@@ -18,43 +18,22 @@ const Homepage = () => {
 
   const indexOfLastPost = currentPage * articlesPerPage;
   const indexOfFirstPost = indexOfLastPost - articlesPerPage;
-  const currentArticles = articleState.articles.slice(
-    indexOfFirstPost,
-    indexOfLastPost
-  );
+  const currentArticles = articleState.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNo => {
     console.log(pageNo);
     setCurrentPage(pageNo);
   };
 
-  const handleChange = e => {
-    if (typingTimeout) {
-      clearTimeout(typingTimeout);
-    }
-
-    const input = e.target.value;
-    setTypingTO(
-      setTimeout(() => {
-        setQuery(input);
-      }, 618)
-    );
-  };
-
-  const sortByDate = (a, b) => {
-    return new Date(a.pub_date) - new Date(b.pub_date);
-  };
-
   const fetchArticles = async url => {
     console.log(url);
     try {
-      setArticles({ articles: articleState.articles, isFetching: true });
+      setArticles(articleState);
+      setIsFetching(true);
       const response = await fetch(url);
       const data = await response.json();
       const fromFetch = data.response.docs;
       const articlesFromFetch = fromFetch
-        .sort(sortByDate)
-        .reverse()
         //filter dups
         .filter((v, i, a) => {
           for (let index = 0; index < i; index++) {
@@ -69,13 +48,13 @@ const Homepage = () => {
           }
           return true;
         });
-      setArticles({
-        articles: [...new Set(articlesFromFetch)],
-        isFetching: false
-      });
+      //setArticles([...new Set(articlesFromFetch)]);
+      setArticles(articlesFromFetch);
+      setIsFetching(false);
     } catch (e) {
       console.log(e);
-      setArticles({ articles: articleState.articles, isFetching: false });
+      setArticles(articleState);
+      setIsFetching(false);
     }
   };
 
@@ -86,7 +65,7 @@ const Homepage = () => {
 
   const searchNYT = () => {
     const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?${
-      query !== "" ? `q=${query}&` : ""
+      debouncedSearchInput !== "" ? `q=${debouncedSearchInput}&` : ""
     }api-key=${process.env.REACT_APP_NYT_API_KEY}`;
     fetchArticles(url);
   };
@@ -95,28 +74,43 @@ const Homepage = () => {
     autoFetch();
     //eslint-disable-next-line
   }, []);
-  useEffect(() => {
-    if (query !== "") searchNYT();
-    else autoFetch();
-    //eslint-disable-next-line
-  }, [query]);
 
   useEffect(() => {
-    console.log(articleState);
-  }, [articleState]);
+    if (debouncedSearchInput === "") setTimeout(autoFetch, 861);
+    else searchNYT();
+    //eslint-disable-next-line
+  }, [debouncedSearchInput]);
+
+  const sortByDate = (a, b) => {
+    return new Date(a.pub_date) - new Date(b.pub_date);
+  };
+  const sortNewest = () => {
+    setArticles([...articleState.sort(sortByDate).reverse()]);
+  };
+  const sortOldest = () => {
+    setArticles([...articleState.sort(sortByDate)]);
+  };
 
   return (
     <div className='homepage'>
-      <input placeholder='Search...' type='text' onChange={handleChange} />
+      <div className='search'>
+        <input
+          placeholder='Search...'
+          type='text'
+          onChange={e => setSearchInput(e.target.value)}
+        />
+        <SortBar newestFnc={sortNewest} oldestFnc={sortOldest} />
+      </div>
       <Pagination
         articlesPerPage={articlesPerPage}
-        totalArticles={articleState.articles.length}
+        totalArticles={articleState.length}
         paginate={paginate}
       />
-      <Articles articles={currentArticles} loading={articleState.isFetching} />
+      {/* sort newest/oldest search */}
+      <Articles articles={currentArticles} loading={isFetching} />
       <Pagination
         articlesPerPage={articlesPerPage}
-        totalArticles={articleState.articles.length}
+        totalArticles={articleState.length}
         paginate={paginate}
       />
     </div>

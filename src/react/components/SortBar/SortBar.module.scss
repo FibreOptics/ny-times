@@ -1,0 +1,19 @@
+.sortBar {
+  display: flex;
+  align-items: center;
+}
+.sortButton,
+span {
+  margin-left: 0.75rem;
+}
+.sortButton {
+  background-color: rgba(240, 239, 239, 0.562);
+  padding: 0.2rem;
+  border-radius: 3px;
+  border: 1px solid black;
+  cursor: pointer;
+  &:hover {
+    background-color: #ffaaab;
+    box-shadow: 0.03rem 0.03rem 0.03rem 0.03rem rgba(9, 28, 70, 0.938);
+  }
+}
