@@ -3,12 +3,11 @@ import Pagination from "./Pagination";
 import { SortBar, Articles } from "react/components/components";
 import useDebounce from "utils/useDebounce";
 
-const Homepage = () => {
+const Homepage = ({ searchInput, setSearchInput }) => {
   const [articleState, setArticles] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [articlesPerPage] = useState(16);
-  const [searchInput, setSearchInput] = useState("");
 
   const debouncedSearchInput = useDebounce(searchInput, 368);
 
@@ -25,7 +24,7 @@ const Homepage = () => {
   };
 
   const fetchArticles = async url => {
-    //console.log(url);
+    console.log(url);
     try {
       setArticles(articleState);
       setIsFetching(true);
@@ -97,6 +96,7 @@ const Homepage = () => {
           placeholder='Search...'
           type='text'
           onChange={e => setSearchInput(e.target.value)}
+          value={searchInput}
         />
         <SortBar newestFnc={sortNewest} oldestFnc={sortOldest} />
       </div>
