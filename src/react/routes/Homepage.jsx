@@ -21,12 +21,11 @@ const Homepage = () => {
   const currentArticles = articleState.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNo => {
-    console.log(pageNo);
     setCurrentPage(pageNo);
   };
 
   const fetchArticles = async url => {
-    console.log(url);
+    //console.log(url);
     try {
       setArticles(articleState);
       setIsFetching(true);
@@ -106,13 +105,7 @@ const Homepage = () => {
         totalArticles={articleState.length}
         paginate={paginate}
       />
-      {/* sort newest/oldest search */}
       <Articles articles={currentArticles} loading={isFetching} />
-      <Pagination
-        articlesPerPage={articlesPerPage}
-        totalArticles={articleState.length}
-        paginate={paginate}
-      />
     </div>
   );
 };
