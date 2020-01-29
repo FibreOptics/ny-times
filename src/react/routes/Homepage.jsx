@@ -45,18 +45,21 @@ const Homepage = ({
 
   useEffect(() => {
     const run = async () => {
-      if (!articleState.length) {
-        setArticles(initialArticles);
-      } else if (debouncedSearchInput === "") {
+      if (debouncedSearchInput === "") {
         setTimeout(() => setArticles(initialArticles), 618);
         setTimeout(() => setArticles(initialArticles), 1688);
       }
-      //TODO:trying to solve the queuing problem
+      //TODO:create a queue stack with a debounce run
       else await searchNYT();
     };
     run();
     //eslint-disable-next-line
   }, [initialArticles, debouncedSearchInput]);
+
+  useEffect(() => {
+    if (searchInput !== "") searchNYT(searchInput);
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <div className='homepage'>
