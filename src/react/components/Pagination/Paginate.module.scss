@@ -1,0 +1,36 @@
+.containerClassName {
+  margin: 1rem 0 0.75rem 3rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  li {
+    a {
+      background-color: rgba(240, 239, 239, 0.562);
+      cursor: pointer;
+      margin: 0.1rem;
+      padding: 0.2rem 0.3rem;
+      border: 1px solid black;
+      border-radius: 3px;
+    }
+    a:hover {
+      background-color: #ffaaab; //$PinkLeaf;
+      box-shadow: 0.03rem 0.03rem 0.03rem 0.03rem rgba(9, 28, 70, 0.938);
+    }
+  }
+  .activeClassName {
+    a,
+    a:hover {
+      color: rgb(220, 250, 233);
+      background-color: rgba(2, 80, 168, 0.959);
+      box-shadow: 0.03rem 0.03rem 0.03rem 0.03rem rgba(9, 28, 70, 0.938);
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    margin: 0.5rem 0.5rem;
+    li {
+      margin: 0.5rem 0.1rem;
+    }
+  }
+}

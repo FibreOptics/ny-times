@@ -1,12 +1,8 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
+import styles from "./Paginate.module.scss";
 
-const Pagination = ({
-  currentPage,
-  articlesPerPage,
-  totalArticles,
-  paginate
-}) => {
+const Pagination = ({ articlesPerPage, totalArticles, paginate }) => {
   const pageNo = [];
   for (let i = 1; i <= Math.ceil(totalArticles / articlesPerPage); i++) {
     pageNo.push(i); //our array of page no.
@@ -25,8 +21,8 @@ const Pagination = ({
       nextLabel={"Next"}
       breakLabel={"..."}
       //
-      containerClassName={"containerClassName"}
-      activeClassName={"activeClassName"}
+      containerClassName={styles.containerClassName}
+      activeClassName={styles.activeClassName}
     />
   );
 };

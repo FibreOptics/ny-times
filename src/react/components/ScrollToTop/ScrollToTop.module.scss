@@ -10,6 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 2px 2px 2px 1px rgba(9, 28, 70, 0.938);
   cursor: pointer;
   &:hover {
     opacity: 0.9;

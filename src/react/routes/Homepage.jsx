@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
-import Pagination from "./Pagination";
-import { SortBar, Articles } from "react/components/components";
+import { SortBar, Articles, Pagination } from "react/components/components";
 import useDebounce from "utils/useDebounce";
 
-const Homepage = ({ searchInput, setSearchInput }) => {
+//TODO: load next search offset
+
+const Homepage = ({
+  searchInput,
+  setSearchInput,
+  isFetching,
+  fetchToArticleStates,
+  initialArticles
+}) => {
   const [articleState, setArticles] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [articlesPerPage] = useState(16);
 
   const debouncedSearchInput = useDebounce(searchInput, 368);
-
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
 
   const indexOfLastPost = currentPage * articlesPerPage;
   const indexOfFirstPost = indexOfLastPost - articlesPerPage;
@@ -22,62 +25,6 @@ const Homepage = ({ searchInput, setSearchInput }) => {
   const paginate = pageNo => {
     setCurrentPage(pageNo);
   };
-
-  const fetchArticles = async url => {
-    console.log(url);
-    try {
-      setArticles(articleState);
-      setIsFetching(true);
-      const response = await fetch(url);
-      const data = await response.json();
-      const fromFetch = data.response.docs;
-      const articlesFromFetch = fromFetch
-        //filter dups
-        .filter((v, i, a) => {
-          for (let index = 0; index < i; index++) {
-            if (
-              v.headline.main === a[index].headline.main &&
-              v.abstract === a[index].abstract &&
-              v.web_url === a[index].web_url &&
-              v.pub_date === a[index].pub_date &&
-              a.indexOf(v.headline.main) !== index
-            )
-              return false;
-          }
-          return true;
-        });
-      //setArticles([...new Set(articlesFromFetch)]);
-      setArticles(articlesFromFetch);
-      setIsFetching(false);
-    } catch (e) {
-      console.log(e);
-      setArticles(articleState);
-      setIsFetching(false);
-    }
-  };
-
-  const autoFetch = () => {
-    const url = `https://api.nytimes.com/svc/archive/v1/${year}/${month}.json?api-key=${process.env.REACT_APP_NYT_API_KEY}`;
-    fetchArticles(url);
-  };
-
-  const searchNYT = () => {
-    const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?${
-      debouncedSearchInput !== "" ? `q=${debouncedSearchInput}&` : ""
-    }api-key=${process.env.REACT_APP_NYT_API_KEY}`;
-    fetchArticles(url);
-  };
-
-  useEffect(() => {
-    autoFetch();
-    //eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    if (debouncedSearchInput === "") setTimeout(autoFetch, 861);
-    else searchNYT();
-    //eslint-disable-next-line
-  }, [debouncedSearchInput]);
 
   const sortByDate = (a, b) => {
     return new Date(a.pub_date) - new Date(b.pub_date);
@@ -88,6 +35,28 @@ const Homepage = ({ searchInput, setSearchInput }) => {
   const sortOldest = () => {
     setArticles([...articleState.sort(sortByDate)]);
   };
+
+  const searchNYT = async () => {
+    const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?${
+      debouncedSearchInput !== "" ? `q=${debouncedSearchInput}&` : ""
+    }api-key=${process.env.REACT_APP_NYT_API_KEY}`;
+    setArticles(await fetchToArticleStates(url));
+  };
+
+  useEffect(() => {
+    const run = async () => {
+      if (!articleState.length) {
+        setArticles(initialArticles);
+      } else if (debouncedSearchInput === "") {
+        setTimeout(() => setArticles(initialArticles), 618);
+        setTimeout(() => setArticles(initialArticles), 1688);
+      }
+      //TODO:trying to solve the queuing problem
+      else await searchNYT();
+    };
+    run();
+    //eslint-disable-next-line
+  }, [initialArticles, debouncedSearchInput]);
 
   return (
     <div className='homepage'>

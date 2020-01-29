@@ -6,3 +6,4 @@ export { default as GoBack } from "./GoBack/GoBack";
 export { default as Loading } from "./Loading/Loading";
 export { default as SortBar } from "./SortBar/SortBar";
 export { default as ScrollToTop } from "./ScrollToTop/ScrollToTop";
+export { default as Pagination } from "./Pagination/Pagination";

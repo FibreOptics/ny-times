@@ -5,7 +5,7 @@ import { ReactComponent as UpArrow } from "assets/arrowup.svg";
 const ScrollToTop = () => {
   const [YOffset, setYOffset] = useState(window.scrollY);
   const scrollUp = () => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   window.addEventListener("scroll", event => {
     setYOffset(window.scrollY);

@@ -7,7 +7,7 @@ const ArticleDetails = ({ history, article }) => {
   const backHome = () => {
     history.goBack();
   };
-  console.log(article);
+  //console.log(article);
   return (
     <div className={styles.detailspage}>
       <GoBack goBack={backHome} />
