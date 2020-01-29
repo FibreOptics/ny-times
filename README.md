@@ -1,6 +1,6 @@
 ## NYT Articles
 
-A web-app created with create-react-app with node-sass and NewYork-Times API.<br />
+A web-app created with create-react-app, node-sass and [NewYork-Times API](https://developer.nytimes.com/apis).<br />
 
 #### Description
 
@@ -12,7 +12,7 @@ The website consists of the
 - DeatailPage: the page renders the article's object keys.
 - and the 404 not found page: a page to handle non-existing routes
 
-The production can be found live at [nyt live](https://ny-times-pi.now.sh/)
+The production can be found live at [NYT live](https://ny-times-pi.now.sh/)
 
 #### External libraries used
 
